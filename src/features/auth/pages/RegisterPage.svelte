@@ -1,19 +1,19 @@
-<script lang="ts">
+<script>
   import { User, Mail, Lock, LoaderCircle, UserPlus } from "lucide-svelte";
   import { authStore } from "../states/authStore";
   import { showErrorDialog } from "../../../helpers/toolsHelper";
-  import { goto } from "$app/navigation";
+  import { navigate } from "../../../router.js";
 
-  let name: string = "";
-  let email: string = "";
-  let password: string = "";
-  let passwordConfirmation: string = "";
-  let loading: boolean = false;
+  let name = "";
+  let email = "";
+  let password = "";
+  let passwordConfirmation = "";
+  let loading = false;
 
   $: if ($authStore.isAuthRegister === true) {
     loading = false;
     authStore.setIsAuthRegister(false);
-    goto("/auth/login");
+    navigate("/auth/login");
   }
 
   async function onSubmitHandler() {
@@ -51,7 +51,7 @@
     <div class="relative">
       <User
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="text"
@@ -72,7 +72,7 @@
     <div class="relative">
       <Mail
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="email"
@@ -93,7 +93,7 @@
     <div class="relative">
       <Lock
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="password"
@@ -114,7 +114,7 @@
     <div class="relative">
       <Lock
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="password"

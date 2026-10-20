@@ -1,19 +1,19 @@
-<script lang="ts">
+<script>
   import { usersStore } from "../states/usersStore";
   import { showErrorDialog } from "../../../helpers/toolsHelper";
   import { User, Camera, Check, LoaderCircle, ShieldCheck } from "lucide-svelte";
 
   $: profile = $usersStore.profile;
 
-  let name: string = "";
-  let email: string = "";
-  let oldPassword: string = "";
-  let newPassword: string = "";
-  let newPasswordConfirmation: string = "";
+  let name = "";
+  let email = "";
+  let oldPassword = "";
+  let newPassword = "";
+  let newPasswordConfirmation = "";
 
-  let loadingProfile: boolean = false;
-  let loadingPhoto: boolean = false;
-  let loadingPassword: boolean = false;
+  let loadingProfile = false;
+  let loadingPhoto = false;
+  let loadingPassword = false;
 
   $: if (profile) {
     name = profile.name || "";
@@ -51,9 +51,8 @@
     usersStore.asyncPutProfile(name.trim(), email.trim());
   }
 
-  function handlePhotoUpload(e: Event) {
-    const target = e.target as HTMLInputElement;
-    const file = target.files?.[0];
+  function handlePhotoUpload(e) {
+    const file = e.target.files?.[0];
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {

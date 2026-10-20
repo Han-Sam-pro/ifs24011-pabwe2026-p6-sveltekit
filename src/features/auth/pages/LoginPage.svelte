@@ -1,13 +1,12 @@
-<script lang="ts">
+<script>
   import { Mail, Lock, LoaderCircle, LogIn } from "lucide-svelte";
-  import { goto } from "$app/navigation";
   import { authStore } from "../states/authStore";
   import { usersStore } from "../../users/states/usersStore";
   import apiHelper from "../../../helpers/apiHelper";
 
-  let email: string = "";
-  let password: string = "";
-  let loading: boolean = false;
+  let email = "";
+  let password = "";
+  let loading = false;
 
   $: if ($authStore.isAuthLogin === true) {
     const authToken = apiHelper.getAccessToken();
@@ -22,27 +21,15 @@
   $: if ($usersStore.isProfile) {
     loading = false;
     authStore.setIsAuthLogin(false);
-    const profile = $usersStore.profile;
     usersStore.setIsProfile(false);
-    if (profile) {
-      goto("/");
-    }
   }
 
   async function onSubmitHandler() {
     loading = true;
     try {
       await authStore.asyncSetIsAuthLogin(email, password);
-      if (!apiHelper.getAccessToken() || !authStore.isAuthLogin) {
+      if (!apiHelper.getAccessToken()) {
         loading = false;
-        return;
-      }
-      await usersStore.asyncSetProfile();
-      loading = false;
-      authStore.setIsAuthLogin(false);
-      usersStore.setIsProfile(false);
-      if (usersStore.profile) {
-        await goto("/");
       }
     } catch {
       loading = false;
@@ -58,7 +45,7 @@
     <div class="relative">
       <Mail
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="email"
@@ -79,7 +66,7 @@
     <div class="relative">
       <Lock
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="password"

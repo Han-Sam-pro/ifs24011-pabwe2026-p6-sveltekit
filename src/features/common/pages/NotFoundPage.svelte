@@ -1,5 +1,5 @@
-<script lang="ts">
-  import { goto } from "$app/navigation";
+<script>
+  import { navigate } from "../../../router.js";
   import { CircleQuestionMark, ArrowLeft, House } from "lucide-svelte";
 </script>
 
@@ -31,7 +31,7 @@
       <button
         type="button"
         data-testid="home-button"
-        on:click={() => goto("/")}
+        on:click={() => navigate("/")}
         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-sm font-semibold text-white shadow-md shadow-indigo-600/25 transition-all"
       >
         <House size={16} />
